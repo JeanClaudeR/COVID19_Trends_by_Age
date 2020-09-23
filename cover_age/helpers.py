@@ -13,7 +13,7 @@ from sklearn.linear_model import Ridge
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 
-from src.mysettings import firsts_of_the_month
+from cover_age.mysettings import firsts_of_the_month
 
 
 def delete_spaces(s):

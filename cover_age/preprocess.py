@@ -8,9 +8,9 @@ app: Module to run the app
 import pandas as pd
 
 # helper functions
-from src.helpers import delete_spaces
+from cover_age.helpers import delete_spaces
 # global settings
-from src.mysettings import *
+from cover_age.mysettings import *
 
 ##########################################
 # Load in memory needed data :
