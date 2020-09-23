@@ -5,19 +5,19 @@ app: Module to run the app
 .. moduleauthor:: Lilian MAREY <lilian.marey@ensae.fr>
 
 """
+from datetime import date
+from sys import exit
+
 import dash
 import dash_core_components as dcc
-from dash.dependencies import Input, Output
 import dash_html_components as html
-
-from sys import exit
-from datetime import date
 import pandas as pd
+from dash.dependencies import Input, Output
 
-from src.mysettings import months_list, firsts_of_the_month
-from src.helpers import regions_of_country, regionError, adaptMetricsInterval
-from src.preprocess import label_gender
-import src.plots as plt 
+import cover_age.plots as plt
+from cover_age.helpers import adaptMetricsInterval, regionError, regions_of_country
+from cover_age.mysettings import firsts_of_the_month, months_list
+from cover_age.preprocess import label_gender
 
 ##########################################
 # Import needed data
