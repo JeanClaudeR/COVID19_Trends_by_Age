@@ -19,7 +19,8 @@ from cover_age.mysettings import *
 # US states population
 
 print('Importation of population datasets...')
-pop_by_country = pd.read_csv(POPULATION_DATA_PATH, sep = ';')
+worldpop = 'C:\\Users\\frurajc\\_PROJECTS\\DS_projects\\_Covid\\Covid19_Trends_by_Age\\cover_age\\data\\population_datasets\\Countries_pop.csv'
+pop_by_country = pd.read_csv(worldpop, sep = ';') #pd.read_csv(POPULATION_DATA_PATH, sep = ';')
 pop_usa_states =  pd.read_csv(USSTATES_DATA_PATH, sep = ';')
 print('Done')
 
@@ -27,7 +28,7 @@ print('Done')
 # Functions
 
 def computeValuebyPop(row):
-    """Computes values divided by the coountry population
+    """Computes values divided by the country population
 
     Parameters:
     -----------

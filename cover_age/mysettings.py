@@ -12,7 +12,8 @@ from matplotlib import image
 
 # Relative data folder
 PATH = pathlib.Path(__file__).parent
-DATA_PATH = PATH.joinpath('../data').resolve()
+DATA_PATH = PATH.joinpath('./data').resolve()
+PREPROCESSED_DATA_PATH = DATA_PATH.joinpath('preprocessed_data.csv')
 
 ########################
 # PATHS for needed data :
@@ -21,8 +22,13 @@ DATA_PATH = PATH.joinpath('../data').resolve()
 # US states population
 
 HARMONISED_DATA_PATH = DATA_PATH.joinpath('Output_10.csv')
-POPULATION_DATA_PATH = DATA_PATH.joinpath('./population_datasets/Countries_pop.csv')
+POPULATION_DATA_PATH = DATA_PATH.joinpath('./population_datasets/worldpop.csv')
 USSTATES_DATA_PATH = DATA_PATH.joinpath('./population_datasets/States_of_the_USA_pop.csv')
+
+# Absolute path
+# POPULATION_DATA_PATH = 'c:\users\frurajc\_projects\ds_projects\_covid\covidtrends_age\cover_age\data\population_datasets\world_pop.csv'
+# USSTATES_DATA_PATH = DATA_PATH.joinpath('./population_datasets/States_of_the_USA_pop.csv')
+
 
 #dictionary for genders label
 label_gender = {

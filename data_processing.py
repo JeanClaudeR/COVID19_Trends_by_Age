@@ -12,9 +12,8 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
-from dash.dependencies import Input, Output
-
 import src.plots as plt
+from dash.dependencies import Input, Output
 from src.helpers import *
 from src.mysettings import *
 from src.preprocess import *

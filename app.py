@@ -5,6 +5,7 @@ app: Module to run the app
 .. moduleauthor:: Lilian MAREY <lilian.marey@ensae.fr>
 
 """
+import pathlib
 from datetime import date
 from sys import exit
 
@@ -15,16 +16,22 @@ import pandas as pd
 from dash.dependencies import Input, Output
 
 import cover_age.plots as plt
-from cover_age.helpers import adaptMetricsInterval, regionError, regions_of_country
-from cover_age.mysettings import firsts_of_the_month, months_list
+from cover_age.helpers import (adaptMetricsInterval, regionError,
+                               regions_of_country)
+from cover_age.mysettings import (
+    firsts_of_the_month, months_list,
+    PREPROCESSED_DATA_PATH)
 from cover_age.preprocess import label_gender
+
+
+
 
 ##########################################
 # Import needed data
 
 print('Computed data importation : ')
 try:
-    df = pd.read_csv('data/preprocessed_data.csv')
+    df = pd.read_csv(PREPROCESSED_DATA_PATH)
     df = df[df['Country'] != 'UK']
 except:
     print('data not found, please preprocess data before launching the app')

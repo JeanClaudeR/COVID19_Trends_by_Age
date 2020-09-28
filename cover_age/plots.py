@@ -12,12 +12,12 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-from cover_age.helpers import (adaptDataframeHistogram, ageRange, computeDatecode,
-                         computeDateFormat, dfadaptDateRange,
-                         regions_of_country, regression, regression_histogram,
-                         select_data)
-from cover_age.mysettings import (code_country, code_state, firsts_of_the_month,
-                            label_dic, months_list)
+from cover_age.helpers import (adaptDataframeHistogram, ageRange,
+                               computeDatecode, computeDateFormat,
+                               dfadaptDateRange, regions_of_country,
+                               regression, regression_histogram, select_data)
+from cover_age.mysettings import (code_country, code_state,
+                                  firsts_of_the_month, label_dic, months_list)
 from cover_age.preprocess import divide_US_Dataframe
 
 
