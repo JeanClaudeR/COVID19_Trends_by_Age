@@ -9,6 +9,7 @@ import dash
 import dash_core_components as dcc
 from dash.dependencies import Input, Output
 import dash_html_components as html
+from flask import send_file
 
 from sys import exit
 from datetime import date
@@ -61,6 +62,7 @@ app.layout = html.Div(
              ),
 
      html.Div(
+        children =
          [
              html.H5(children = 'COVID-19 Web App')
         ],
@@ -300,7 +302,7 @@ app.layout = html.Div(
             dcc.DatePickerRange(
                 id = 'date_range',
                 start_date = date(2020, 1, 1),
-                end_date = date(2020, 8, 6),
+                end_date = date(2020, 11, 17),
                 min_date_allowed = date(2020, 1, 1),
                 display_format = 'MM DD YYYY',
                 initial_visible_month = '2020 08 07'                     
@@ -388,15 +390,6 @@ app.layout = html.Div(
         className = 'main_graph'
             ),
 
-    # html.Div(
-    #         [
-    #             dcc.Markdown('''
-    #             This app has been the object of [Lilian Marey](https://www.linkedin.com/in/lilian-marey-5b656b193/)'s internship at Scor
-    #             ''') 
-    #         ],
-    #         className = 'description3'
-    #             ),
-
     html.Div(
         id = 'select_table',
         children = [
@@ -413,6 +406,15 @@ app.layout = html.Div(
             ),
 
     html.Div(
+        id = 'download_button',
+        style = {'display': 'block'},
+        children = [
+                   dcc.Markdown('[Download data](/dash/download)')  
+                    ],
+        className = 'download_button'
+        ), 
+
+    html.Div(
         id = 'bottom_slider',
         style = {'display': 'none'},
         children = [
@@ -420,12 +422,12 @@ app.layout = html.Div(
                             id='date_grad_hist_slider',
                             # marks={30*i: 'gap in day = {}'.format(30*i) for i in range(7)},
                             min = 0,
-                            max = 246,
-                            value = 230,
-                            step = 7,
+                            max = 330,
+                            value = 330,
+                            step = 9,
                             updatemode = 'drag',
                             marks = {
-                                    firsts_of_the_month[i] : months_list[i] + ' 2020' for i in range(9)
+                                    firsts_of_the_month[i] : months_list[i] + ' 2020' for i in range(12)
                                     }                           
                                 )
                     ],
@@ -441,10 +443,17 @@ app.layout = html.Div(
         ], 
         className = 'logo1'
             ), 
-
     ]
                 )
 
+
+@app.server.route('/dash/download') 
+def download_csv():
+
+    return send_file('data/download/data_download.csv',
+                     mimetype = 'text/csv',
+                     attachment_filename = 'data_download.csv',
+                     as_attachment = True)
 
 @app.callback(
     [
@@ -471,13 +480,12 @@ app.layout = html.Div(
     Output('unit_row_title', component_property = 'style'),
     Output('select_table', component_property = 'style'),
     Output('bottom_slider', component_property = 'style'),
+    Output('download_button', component_property = 'style'),
     Output('country_checklist', component_property = 'multi'),
     Output('region_checklist', component_property = 'multi'),
     Output('age_checklist', component_property = 'multi'),
     Output('metric_checklist', component_property = 'multi'),
     Output('gender_checklist', component_property = 'multi'),
-
-
     ],
     [
         Input('map_button', 'value')
@@ -498,7 +506,7 @@ def global_display_callback(selected_graph):
     """
 
     if selected_graph == 'chart':
-        display_option = [{'opacity': 1} for i in range(22)]+[{'opacity': .2}, True, True, True, True, True]
+        display_option = [{'opacity': 1} for i in range(22)]+[{'opacity': .2}, {'opacity': 1}, True, True, True, True, True]
 
     elif selected_graph == 'hist':
             display_option = [
@@ -525,6 +533,7 @@ def global_display_callback(selected_graph):
                                 {'opacity': 0.2},
                                 {'opacity': 1},
                                 {'opacity': 1},
+                                {'opacity': 0},
                                 False,
                                 False,
                                 True,
@@ -557,6 +566,7 @@ def global_display_callback(selected_graph):
                                 {'opacity': 1},
                                 {'opacity': 0.2},
                                 {'opacity': 1},
+                                {'opacity': 0},
                                 False,
                                 False,
                                 False,
@@ -586,7 +596,7 @@ def second_checklist_callback(selected_countries):
     options : dict list
         the "options" argument of the regions checklist
     """
-    if isinstance(selected_countries, str) or isinstance(selected_countries, unicode):
+    if isinstance(selected_countries, str) or isinstance(selected_countries, str):
         C = [selected_countries]
     else:
         C = selected_countries
@@ -689,7 +699,7 @@ def graph_callback(
     fig : plotly Figure
         the corresponding plot
     """
-    if isinstance(selected_countries, str) or isinstance(selected_countries, unicode):
+    if isinstance(selected_countries, str) or isinstance(selected_countries, str):
         C = [selected_countries]
     else:
         C = selected_countries
@@ -713,7 +723,7 @@ def graph_callback(
     else:
         pass
 
-    if  isinstance(selected_ages, int) or isinstance(selected_ages, unicode):
+    if  isinstance(selected_ages, int) or isinstance(selected_ages, str):
         A = [selected_ages]
     else:
         A = selected_ages
@@ -724,7 +734,7 @@ def graph_callback(
     else:
         pass
 
-    if isinstance(selected_metrics, str) or isinstance(selected_metrics, unicode):
+    if isinstance(selected_metrics, str) or isinstance(selected_metrics, str):
         M = [selected_metrics]
     else:
         M = selected_metrics
@@ -738,7 +748,7 @@ def graph_callback(
     else:
         S = True
 
-    if isinstance(selected_genders, str) or isinstance(selected_genders, unicode):
+    if isinstance(selected_genders, str) or isinstance(selected_genders, str):
             G = [selected_genders]
     else:
         G = selected_genders
